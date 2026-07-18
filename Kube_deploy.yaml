@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neeerajjoshi-eta-deploy
+  labels:
+    app: neeerajjoshi-eta-deploy-lbl
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: neeerajjoshi-eta-app
+    spec:
+      containers:
+      - name: neeerajjoshi-eta-container
+        image: loksaieta/pljavawebappimg:latest
+        ports:
+        - containerPort: 8080
+  selector:
+    matchLabels:
+      app: neeerajjoshi-eta-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neeerajjoshi-eta-np-service
+  labels:
+    app: neeerajjoshi-eta-app
+spec:
+  selector:
+    app: neeerajjoshi-eta-deploy-lbl
+  type: NodePort
+  ports:
+  - nodePort: 31028
+    port: 8080
+    targetPort: 8080
