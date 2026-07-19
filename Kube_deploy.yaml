@@ -28,7 +28,7 @@ metadata:
     app: neeerajjoshi-eta-app
 spec:
   selector:
-    app: neeerajjoshi-eta-deploy
+    app: neeerajjoshi-eta-app
   type: NodePort
   ports:
   - nodePort: 31028
